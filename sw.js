@@ -1,9 +1,14 @@
-const CACHE = 'shah-academic-v1';
+const CACHE = 'shah-academic-v2';
 const SHELL = ['./', './index.html', './data.js', './manifest.webmanifest',
-  './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
+  './icon-192.png', './icon-512.png', './maskable-512.png'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  // Ek file bhi missing ho to bhi service worker install ho jaye
+  e.waitUntil(
+    caches.open(CACHE)
+      .then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => {}))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', e => {
@@ -14,12 +19,11 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Network-first: online ho to hamesha latest data, offline ho to cache se chalega
+// Network-first: online ho to latest, offline ho to cache se
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-  if (url.origin !== location.origin) return;
+  if (new URL(req.url).origin !== location.origin) return;
   e.respondWith(
     fetch(req)
       .then(res => {
@@ -29,6 +33,6 @@ self.addEventListener('fetch', e => {
         }
         return res;
       })
-      .catch(() => caches.match(req).then(r => r || (req.mode === 'navigate' ? caches.match('./index.html') : undefined)))
+      .catch(() => caches.match(req).then(r => r || (req.mode === 'navigate' ? caches.match('./index.html') : Response.error())))
   );
 });
