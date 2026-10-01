@@ -63,7 +63,7 @@ footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-s
 <body>
 <header class="topbar">
   <div class="wrap"><nav class="nav">
-    <div class="brand"><div class="logo">AS</div><div><h1>Ayaansh Shah</h1><small>ACADEMIC PORTAL</small></div></div>
+    <div class="brand"><div class="logo">AS</div><div><h1>Shah Academic</h1><small>ACADEMIC PORTAL</small></div></div>
     <div class="head-actions"><button class="install-btn" id="installBtn" hidden aria-label="Install Shah Academic"><span data-icon="install"></span><span class="install-label">Install</span></button><button class="register-btn" id="registerBtn">Register</button></div>
   </nav></div>
 </header>
@@ -145,7 +145,93 @@ function openScreen(key){const d=data[key];if(!d)return;currentKey=key;currentFi
 document.querySelectorAll(".service").forEach(x=>x.onclick=()=>{const key=x.dataset.screen;if(key==="help")openHelp();else openScreen(key)});
 $("#backBtn").onclick=()=>{material.classList.remove("active");home.classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})};$("#filterBtn").onclick=()=>filterPanel.classList.toggle("open");search.addEventListener("input",()=>currentKey&&renderMaterials(data[currentKey]));
 function openHelp(){const d=data.help;currentKey="help";home.classList.add("hidden");material.classList.add("active");$("#screenIcon").innerHTML=icon(d.icon);$("#screenTitle").textContent=d.title;$("#screenDesc").textContent=d.desc;filterPanel.classList.remove("open");filterPanel.innerHTML="";$("#resourceCount").textContent=d.items.length+" items";search.value="";renderMaterials(d)}
+
 renderStudent();
+
+/* PWA install support */
+let deferredInstallPrompt = null;
+const installBtn = document.getElementById("installBtn");
+const installHelp = document.getElementById("installHelp");
+const installHelpBody = document.getElementById("installHelpBody");
+const closeInstallHelp = document.getElementById("closeInstallHelp");
+
+function showInstallButton(){
+  if(installBtn) installBtn.hidden = false;
+}
+function showInstallHelp(){
+  if(!installHelp || !installHelpBody) return;
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isAndroid = /android/i.test(navigator.userAgent);
+  if(isIOS){
+    installHelpBody.innerHTML = '<div class="step"><b>iPhone/iPad:</b> Open this site in Safari, tap the Share button, then choose <b>Add to Home Screen</b>.</div>';
+  }else if(isAndroid){
+    installHelpBody.innerHTML = '<div class="step"><b>Android:</b> Open this site in Chrome. Use the browser menu <b>⋮</b> and choose <b>Install app</b> or <b>Add to Home screen</b>.</div>';
+  }else{
+    installHelpBody.innerHTML = '<div class="step"><b>Desktop Chrome/Edge:</b> Use the install icon in the address bar or browser menu when it appears.</div>';
+  }
+  installHelp.classList.add("open");
+  installHelp.setAttribute("aria-hidden","false");
+}
+if(installBtn){
+  installBtn.addEventListener("click", async ()=>{
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      const result = await deferredInstallPrompt.userChoice;
+      if(result && result.outcome === "accepted") installBtn.hidden = true;
+      deferredInstallPrompt = null;
+    }else{
+      showInstallHelp();
+    }
+  });
+}
+window.addEventListener("beforeinstallprompt", event=>{
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  showInstallButton();
+});
+window.addEventListener("appinstalled", ()=>{
+  deferredInstallPrompt = null;
+  if(installBtn) installBtn.hidden = true;
+});
+if(closeInstallHelp) closeInstallHelp.onclick=()=>{
+  installHelp.classList.remove("open");
+  installHelp.setAttribute("aria-hidden","true");
+};
+if(installHelp) installHelp.addEventListener("click",e=>{
+  if(e.target===installHelp) closeInstallHelp.click();
+});
+
+/* Service workers work only on HTTPS or localhost, not file:// */
+if("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}else if(installBtn){
+  /* Make the manual installation instructions reachable when testing file:// */
+  installBtn.hidden = false;
+}
+
 </script>
+
+<div class="install-help" id="installHelp" aria-hidden="true">
+  <div class="install-help-card">
+    <div class="install-help-head">
+      <div><b>Install Shah Academic</b><span>Add the portal to your home screen.</span></div>
+      <button id="closeInstallHelp" aria-label="Close">×</button>
+    </div>
+    <div class="install-help-body" id="installHelpBody"></div>
+  </div>
+</div>
+<style>
+.install-help{position:fixed;inset:0;background:rgba(17,20,27,.28);backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center;z-index:1000;padding:12px}
+.install-help.open{display:flex}
+.install-help-card{width:min(440px,100%);background:#fff;border:1px solid #e8e9ed;border-radius:22px;box-shadow:0 18px 60px rgba(0,0,0,.16);overflow:hidden}
+.install-help-head{display:flex;justify-content:space-between;gap:12px;padding:16px 17px;border-bottom:1px solid #e8e9ed}
+.install-help-head div{display:grid;gap:3px}.install-help-head span{font-size:11px;color:#74767b}
+.install-help-head button{width:30px;height:30px;border:0;border-radius:50%;background:#f8f9fb;font-size:20px;line-height:1;color:#171719}
+.install-help-body{padding:17px;font-size:13px;line-height:1.55;color:#3f4147}
+.install-help-body b{color:#171719}.install-help-body .step{padding:10px 0;border-bottom:1px solid #e8e9ed}
+.install-help-body .step:last-child{border-bottom:0}
+@media(max-width:540px){.install-help{padding:8px}.install-help-card{border-radius:20px}}
+</style>
+
 </body>
 </html>
