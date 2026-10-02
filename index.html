@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#e6eefb">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -108,6 +108,143 @@ main{padding-top:12px}
 .service-icon{width:46px;height:46px;border-radius:15px}
 .service:active{transform:scale(.97)}
 }
+
+/* ===== CLAYMORPHISM + APP-STYLE MOBILE UI (sirf phone <=540px) - PC/tab par koi asar nahi ===== */
+.greet,.gsearch,.gresults,.recent,.tipcard,.svc-badge{display:none}
+@keyframes clayUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes claySlide{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@media(max-width:540px){
+:root{--cbg:#e6eefb;--cs:#eff4fd;--cink:#14213f;--cmut:#6a7690;--csh:rgba(112,140,200,.42);--csh2:rgba(112,140,200,.16);
+--clay:9px 9px 20px var(--csh),-8px -8px 18px rgba(255,255,255,.95),inset -5px -5px 10px var(--csh2),inset 5px 5px 10px rgba(255,255,255,.9);
+--clay-sm:5px 5px 12px var(--csh),-5px -5px 11px rgba(255,255,255,.95),inset -3px -3px 6px var(--csh2),inset 3px 3px 6px rgba(255,255,255,.9);
+--clay-in:inset 5px 5px 10px rgba(112,140,200,.34),inset -5px -5px 10px rgba(255,255,255,.95);
+--clay-blue:7px 7px 16px rgba(42,79,179,.38),-5px -5px 12px rgba(255,255,255,.9),inset -4px -4px 9px rgba(10,30,120,.32),inset 4px 4px 9px rgba(255,255,255,.38);
+--blue-grad:linear-gradient(145deg,#6a9bef,#2f58bd)}
+html,body{background:var(--cbg)}
+body{color:var(--cink);padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+footer{border:0;padding:14px 0 6px}
+.topbar{background:rgba(230,238,251,.86);border:0;padding:8px 0 6px}
+.nav{border:0;border-radius:26px;background:var(--cs);box-shadow:var(--clay-sm);min-height:60px}
+.logo{border:0;border-radius:16px;background:var(--cs);box-shadow:var(--clay-sm);color:#2a4fb3}
+.register-btn{height:38px;background:var(--blue-grad);box-shadow:var(--clay-blue)}
+.install-btn{border:0;background:var(--cs);box-shadow:var(--clay-sm);color:#2a4fb3}
+
+/* Home layout */
+.home-screen{display:flex;flex-direction:column;gap:18px}
+.home-screen:not(.hidden){animation:clayUp .32s ease both}
+.greet{order:1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 4px}
+.greet small{display:block;font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--cmut)}
+.greet h2{font-family:var(--sans);font-size:21px;font-weight:800;line-height:1.2;color:var(--cink)}
+.streak{display:inline-flex;align-items:center;gap:4px;padding:8px 12px;border-radius:999px;background:linear-gradient(145deg,#fff5d6,#ffe7a3);box-shadow:var(--clay-sm);font-size:12px;color:#7a5200;flex-shrink:0}
+.streak[hidden]{display:none}.streak b{font-size:14px}.streak i{font-style:normal;font-weight:700;font-size:10px}
+.student-card{order:2}
+.gsearch{order:3;display:flex;align-items:center;gap:10px;height:50px;padding:0 17px;border-radius:25px;background:var(--cs);box-shadow:var(--clay-in);color:var(--cmut)}
+.gsearch input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:14px;color:var(--cink)}
+.gresults{order:4}.home-screen.searching>.gresults{display:grid;gap:12px}
+.services{order:5;margin:0}
+.recent{order:6;display:block}.recent[hidden]{display:none}
+.tipcard{order:7;display:flex;gap:13px;align-items:center;padding:16px;border-radius:28px;background:linear-gradient(145deg,#fff6dc,#ffeab4);box-shadow:var(--clay)}
+.announce{order:8;margin:0;padding:16px}
+.home-screen.searching>.student-card,.home-screen.searching>.services,.home-screen.searching>.recent,.home-screen.searching>.tipcard,.home-screen.searching>.announce{display:none}
+.tip-ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:#fff8e6;box-shadow:var(--clay-sm);flex-shrink:0}
+.tipcard small{display:block;font-size:9.5px;font-weight:800;letter-spacing:1.5px;color:#9a7420}
+.tipcard p{font-size:13px;line-height:1.45;color:#5a4410;margin-top:3px;font-weight:600}
+.gres{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-radius:24px;background:var(--cs);box-shadow:var(--clay-sm)}
+.gres:active{box-shadow:var(--clay-in)}
+.gres-ic,.rc-ic{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#f6f9ff,#d6e6ff);box-shadow:var(--clay-sm);color:#2a4fb3;flex-shrink:0}
+.gres-tx{min-width:0}.gres-tx b{display:block;font-size:13px;color:var(--cink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gres-tx small{font-size:10.5px;color:var(--cmut)}
+.gempty{padding:28px 14px;text-align:center;font-size:12.5px;color:var(--cmut);border-radius:24px;box-shadow:var(--clay-in)}
+.recent-list{display:flex;gap:14px;overflow-x:auto;padding:6px 6px 18px;margin:0 -6px;scroll-snap-type:x proximity;scrollbar-width:none}
+.recent-list::-webkit-scrollbar{display:none}
+.rc{flex:0 0 152px;scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:26px;background:var(--cs);box-shadow:var(--clay-sm)}
+.rc:active{box-shadow:var(--clay-in)}
+.rc b{font-size:12px;line-height:1.3;color:var(--cink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* Clay cards */
+.card{border:0;border-radius:28px;background:var(--cs);box-shadow:var(--clay)}
+.student-card{border-radius:30px}
+.student-top{padding:22px 18px 24px;background:radial-gradient(circle at 90% 0,rgba(255,255,255,.28),transparent 55%),var(--blue-grad);box-shadow:inset 5px 5px 12px rgba(255,255,255,.3),inset -6px -6px 14px rgba(10,30,120,.3)}
+.avatar{border:0;background:linear-gradient(145deg,#fff,#cfe2ff);color:#2a4fb3;box-shadow:5px 5px 12px rgba(10,30,120,.35),-3px -3px 8px rgba(255,255,255,.35),inset -3px -3px 7px rgba(70,110,200,.25),inset 3px 3px 7px #fff}
+.student-badge{border:0;background:rgba(255,255,255,.18);box-shadow:inset 2px 2px 5px rgba(255,255,255,.3),inset -2px -2px 5px rgba(10,30,120,.25)}
+.student-details{gap:10px;padding:16px 14px 18px;background:var(--cs)}
+.detail{border:0;border-radius:18px;background:var(--cs);box-shadow:var(--clay-in);padding:10px 4px}
+.detail+.detail{border-left:0}
+.empty-student{background:var(--cs);color:var(--cmut)}
+.announcement{border:0;border-radius:22px;background:var(--cs);box-shadow:var(--clay-in)}
+.ann-icon{border:0;border-radius:50%;background:var(--cs);box-shadow:var(--clay-sm)}
+
+/* Services */
+.service-grid{gap:14px}
+.service{position:relative;min-height:114px;border-radius:28px;background:var(--cs);box-shadow:var(--clay);transition:transform .15s,box-shadow .15s}
+.service:hover{transform:none;box-shadow:var(--clay)}
+.service:active{transform:scale(.96);box-shadow:var(--clay-in)}
+.service-icon{width:50px;height:50px;border:0;border-radius:50%;color:#2a4fb3;box-shadow:var(--clay-sm);background:linear-gradient(145deg,#f4f8ff,#cfe2ff)}
+.service:nth-child(2) .service-icon{background:linear-gradient(145deg,#f5f4ff,#d9d6ff)}
+.service:nth-child(3) .service-icon{background:linear-gradient(145deg,#f1fbff,#c9ecfb)}
+.service:nth-child(4) .service-icon{background:linear-gradient(145deg,#f7f5ff,#e0d8ff)}
+.service:nth-child(5) .service-icon{background:linear-gradient(145deg,#f0fcfc,#c8efef)}
+.service h4{color:var(--cink);margin-top:0}
+.svc-badge{display:grid;position:absolute;top:10px;right:11px;min-width:22px;height:22px;padding:0 6px;place-items:center;border-radius:999px;background:var(--blue-grad);color:#fff;font-size:10.5px;font-weight:800;box-shadow:3px 3px 7px rgba(42,79,179,.35),inset 1px 1px 3px rgba(255,255,255,.4)}
+
+/* Bottom navigation */
+.mobile-bottom{position:fixed;left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;justify-content:space-between;gap:4px;padding:8px;border-radius:30px;background:var(--cs);box-shadow:9px 9px 22px var(--csh),-7px -7px 16px rgba(255,255,255,.95),inset -3px -3px 7px var(--csh2),inset 3px 3px 7px rgba(255,255,255,.9)}
+.mobile-bottom button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px 7px;border-radius:22px;color:var(--cmut);transition:.18s}
+.mobile-bottom button svg{width:22px;height:22px}
+.mobile-bottom button i{font-style:normal;font-size:10px;font-weight:700}
+.mobile-bottom button.on{background:var(--blue-grad);color:#fff;box-shadow:var(--clay-blue)}
+.mobile-bottom button:active{transform:scale(.94)}
+
+/* Inner screens */
+.material-screen.active{animation:claySlide .28s ease both}
+.resource-head{border:0;border-radius:30px;background:var(--cs);box-shadow:var(--clay);overflow:hidden}
+.resource-head:after{display:none}
+.back{width:42px;height:42px;border:0;border-radius:50%;background:var(--cs);box-shadow:var(--clay-sm);color:#2a4fb3}
+.screen-icon{width:44px;height:44px;border-radius:50%;background:var(--blue-grad);box-shadow:var(--clay-blue)}
+.resource-title h2{color:var(--cink)}
+.resource-count{border:0;background:var(--cs);box-shadow:var(--clay-sm);color:#2a4fb3}
+.search-box{height:46px;border:0;border-radius:23px;background:var(--cs);box-shadow:var(--clay-in)}
+.filter-btn{height:46px;min-width:46px;border-radius:50%;background:var(--blue-grad);box-shadow:var(--clay-blue)}
+.filter-chip{border:0;border-radius:16px;background:var(--cs);box-shadow:var(--clay-sm);color:var(--cink)}
+.filter-chip.active{background:var(--blue-grad);color:#fff;box-shadow:var(--clay-blue)}
+.material-wrap{padding:4px 6px 8px}
+.material-item{border:0;border-radius:26px;background:var(--cs);box-shadow:var(--clay)}
+.material-item:hover{transform:none}
+.mi-icon{border:0;border-radius:50%;background:linear-gradient(145deg,#f4f8ff,#cfe2ff);box-shadow:var(--clay-sm);color:#2a4fb3}
+.meta{border:0;background:var(--cs);box-shadow:var(--clay-in);color:var(--cmut)}
+.tag{border:0;background:linear-gradient(145deg,#f0f6ff,#d9e8ff);box-shadow:2px 2px 5px rgba(112,140,200,.3),inset 1px 1px 2px #fff}
+.action{border:0;border-radius:16px;background:var(--cs);box-shadow:var(--clay-sm);color:var(--cink)}
+.action.primary{background:var(--blue-grad);color:#fff;box-shadow:var(--clay-blue)}
+.action:active{box-shadow:var(--clay-in)}
+.empty-results{border:0;border-radius:24px;background:var(--cs);box-shadow:var(--clay-in)}
+.help-card,.support-form{border:0;border-radius:24px;background:var(--cs);box-shadow:var(--clay)}
+
+/* Register modal + install help */
+.modal-bg{background:rgba(60,80,130,.35)}
+.modal{background:var(--cbg);border-radius:34px 34px 0 0;box-shadow:0 -10px 30px rgba(60,80,130,.25)}
+.modal-head h3{font-family:var(--sans);font-weight:800;color:var(--cink)}
+.close{border:0;background:var(--cs);box-shadow:var(--clay-sm);color:#2a4fb3}
+.field input,.field select{height:48px;border:0;border-radius:24px;background:var(--cs);box-shadow:var(--clay-in)}
+.class-option{border:0;border-radius:18px;background:var(--cs);box-shadow:var(--clay-sm);color:var(--cink)}
+.class-option.selected{background:var(--blue-grad);color:#fff;box-shadow:var(--clay-blue)}
+.submit{height:50px;background:var(--blue-grad);box-shadow:var(--clay-blue)}
+.install-help .install-help-card{border:0;border-radius:30px;background:var(--cbg);box-shadow:var(--clay)}
+.install-help .install-help-head{border-bottom:0}
+.install-help .install-help-head button{background:var(--cs);box-shadow:var(--clay-sm)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* material card fixes */
+.material-actions{margin-left:57px;width:calc(100% - 57px)}
+.mi-text{padding-bottom:4px}
+.meta{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;border-radius:999px;padding:5px 10px}
+.tag{padding:5px 10px}
+.meta-row{gap:8px;padding-bottom:4px}
+.material-item{padding:14px}
+}
+@media(max-width:390px){
+.material-item{grid-template-columns:45px minmax(0,1fr)}
+.mi-text{max-width:none}
+.material-actions{margin-left:0;width:100%}
+}
 </style>
 </head>
 <body>
@@ -121,7 +258,10 @@ main{padding-top:12px}
 <main><div class="wrap">
 <section class="home-screen" id="homeScreen">
   <div class="hero-intro"><div><span class="kicker">STUDENT DASHBOARD</span><h2>Learn. Prepare. Progress.</h2></div><p>Your academic resources, notices, notes and previous-year papers — organized in one simple portal.</p></div>
+  <section class="greet" id="greet"><div><small id="greetDate"></small><h2 id="greetText">Welcome 👋</h2></div><div class="streak" id="streak" hidden title="Lagataar din jab aapne portal khola"><span>🔥</span><b id="streakN">1</b><i>din</i></div></section>
   <section class="card student-card"><div id="studentArea"></div></section>
+  <label class="gsearch"><span data-icon="search"></span><input id="gSearch" type="search" placeholder="Notes, PDF, PYQ search karo…" autocomplete="off" enterkeyhint="search"></label>
+  <div class="gresults" id="gResults"></div>
   <section class="card announce"><div class="section-head"><h3>Announcements</h3><span>Latest updates</span></div><div class="announcement"><div class="ann-icon" data-icon="megaphone"></div><div><b>Academic Portal is ready</b><p>Register your student profile to personalize the dashboard. Notes, PDFs, PYQs and notices will be added here as materials are uploaded to GitHub.</p></div></div></section>
   <section class="services"><div class="section-head"><h3>More Services</h3><span>Study resources</span></div><div class="service-grid">
     <article class="card service" data-screen="notice"><div class="service-icon" data-icon="notice"></div><div><h4>Notice</h4><p>Important academic announcements</p></div><span class="arrow" data-icon="arrow"></span></article>
@@ -130,6 +270,8 @@ main{padding-top:12px}
     <article class="card service" data-screen="pyq"><div class="service-icon" data-icon="pyq"></div><div><h4>PYQ</h4><p>Previous-year question papers</p></div><span class="arrow" data-icon="arrow"></span></article>
     <article class="card service" data-screen="help"><div class="service-icon" data-icon="help"></div><div><h4>Help &amp; Support</h4><p>Ask for academic or portal help</p></div><span class="arrow" data-icon="arrow"></span></article>
   </div></section>
+  <section class="recent" id="recentSec" hidden><div class="section-head"><h3>Recently Opened</h3></div><div class="recent-list" id="recentList"></div></section>
+  <section class="tipcard" id="tipCard"><div class="tip-ic">💡</div><div><small>STUDY TIP OF THE DAY</small><p id="tipText"></p></div></section>
 </section>
 
 <section class="material-screen" id="materialScreen">
@@ -144,6 +286,14 @@ main{padding-top:12px}
 </section>
 </div></main>
 <footer>Shah Academic · Student learning space</footer>
+
+<nav class="mobile-bottom" id="bnav" aria-label="Quick navigation">
+  <button type="button" data-nav="home" class="on"><span data-ico="home"></span><i>Home</i></button>
+  <button type="button" data-nav="notice"><span data-ico="notice"></span><i>Notice</i></button>
+  <button type="button" data-nav="pdf"><span data-ico="pdf"></span><i>PDF</i></button>
+  <button type="button" data-nav="notes"><span data-ico="notes"></span><i>Notes</i></button>
+  <button type="button" data-nav="pyq"><span data-ico="pyq"></span><i>PYQ</i></button>
+</nav>
 
 <div class="modal-bg" id="modalBg"><div class="modal"><div class="modal-head"><h3>Student Registration</h3><button class="close" id="closeModal" aria-label="Close" data-icon="close"></button></div>
 <form id="registerForm"><div class="field"><label for="name">Student Name</label><input id="name" required maxlength="60" placeholder="Enter your full name"></div><div class="field"><label>Class</label><div class="class-grid" id="classGrid"></div></div><div class="stream" id="streamWrap"><div class="field"><label for="stream">Stream</label><select id="stream"><option value="">Select stream</option><option>Arts</option><option>Science</option><option>Commerce</option></select></div></div><div class="field"><label for="phone">Phone Number</label><input id="phone" required inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10-digit mobile number"></div><button class="submit" type="submit">Complete Registration</button><p class="note">Your profile is stored only in this browser for now. Backend authentication can be added later.</p></form>
@@ -259,6 +409,147 @@ if("serviceWorker" in navigator && (location.protocol === "https:" || location.h
   installBtn.hidden = false;
 }
 
+</script>
+
+<script>
+/* Mobile app features: greeting, streak, global search, recent, daily tip, bottom nav, back button */
+(function(){
+'use strict';
+var Q=function(x){return document.querySelector(x)};
+icons.home='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h4.5v-5h3v5H18v-9"/></svg>';
+document.querySelectorAll('#bnav [data-ico]').forEach(function(el){el.innerHTML=icon(el.dataset.ico)});
+
+var KS='sa_streak',KR='sa_recent';
+function gget(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function gset(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function pad(n){return String(n).padStart(2,'0')}
+function dstr(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+
+/* Streak */
+function updateStreak(){
+  var now=new Date(),today=dstr(now),y=new Date(now);y.setDate(y.getDate()-1);
+  var s=gget(KS,{last:'',n:0});
+  if(s.last!==today){s.n=(s.last===dstr(y))?(s.n||0)+1:1;s.last=today;gset(KS,s)}
+  return s.n||1;
+}
+
+/* Greeting */
+function renderGreet(){
+  var st=gget(STORAGE_KEY,null),h=new Date().getHours();
+  var part=h<5?'Good night':h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  var first=st&&st.name?String(st.name).trim().split(/\s+/)[0]:'';
+  Q('#greetText').textContent=first?part+', '+first+' 👋':'Welcome to Shah Academic 👋';
+  Q('#greetDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
+}
+
+/* Count badges (registered class ke hisaab se) */
+function countFor(k){
+  var reg=getRegisteredClass();
+  return data[k].items.filter(function(i){var c=i.classes||[];return reg==='All Class'||c.indexOf('All Class')>-1||c.indexOf(reg)>-1}).length;
+}
+function renderBadges(){
+  document.querySelectorAll('.service[data-screen]').forEach(function(el){
+    var k=el.dataset.screen;if(!data[k]||k==='help')return;
+    var b=el.querySelector('.svc-badge');
+    if(!b){b=document.createElement('span');b.className='svc-badge';el.appendChild(b)}
+    b.textContent=countFor(k);
+  });
+}
+
+/* Recently opened */
+function renderRecent(){
+  var r=gget(KR,[]);
+  Q('#recentSec').hidden=!r.length;
+  Q('#recentList').innerHTML=r.map(function(x){
+    return '<a class="rc" href="'+escapeHtml(x.h)+'" target="_blank" rel="noopener"><span class="rc-ic">'+icon(data[x.k]?data[x.k].icon:'pdf')+'</span><b>'+escapeHtml(x.t)+'</b></a>';
+  }).join('');
+}
+function pushRecent(k,t,h){
+  if(!h)return;
+  var r=gget(KR,[]).filter(function(x){return x.h!==h});
+  r.unshift({k:k,t:t,h:h});gset(KR,r.slice(0,6));renderRecent();
+}
+Q('#materialWrap').addEventListener('click',function(e){
+  var a=e.target.closest('a.action');if(!a)return;
+  var row=a.closest('.material-item'),t=row&&row.querySelector('.mi-top b');
+  pushRecent(currentKey,t?t.textContent:'Material',a.getAttribute('href'));
+});
+
+/* Daily tip */
+var TIPS=[
+ '25 minute padho, 5 minute break lo — Pomodoro se focus badhta hai.',
+ 'Naya chapter shuru karne se pehle kal ka 5 minute revise karo.',
+ 'PYQ solve karo — exam ka pattern aur important topics samajh aate hain.',
+ 'Raat ko poori neend lo; yaad rakhne ki shakti neend me majboot hoti hai.',
+ 'Formula aur dates ek chhote notebook me likho aur roz ek baar dekho.',
+ 'Padhte time phone ko silent karke dusre kamre me rakh do.',
+ 'Jo padha use bina dekhe apne shabdon me samjhane ki koshish karo.',
+ 'Mushkil subject ko din ke sabse fresh time me padho.',
+ 'Har hafte ek PYQ paper timer lagakar do — exam jaisa practice.',
+ 'Paani piyo aur thoda stretch karo — padhai ke beech chhota break zaroori hai.'
+];
+function renderTip(){
+  var d=new Date(),day=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);
+  Q('#tipText').textContent=TIPS[day%TIPS.length];
+}
+
+/* Global search */
+var gi=Q('#gSearch'),gr=Q('#gResults'),homeEl=Q('#homeScreen'),gOut=[];
+function openKey(k){k==='help'?openHelp():openScreen(k)}
+function runGlobalSearch(){
+  var q=gi.value.trim().toLowerCase();
+  homeEl.classList.toggle('searching',!!q);
+  if(!q){gr.innerHTML='';gOut=[];return}
+  gOut=[];
+  ['notice','pdf','notes','pyq','help'].forEach(function(k){
+    (data[k]&&data[k].items||[]).forEach(function(it){if(itemSearchText(it).indexOf(q)>-1)gOut.push({k:k,it:it})});
+  });
+  if(!gOut.length){gr.innerHTML='<div class="gempty">Kuch nahi mila — koi aur shabd try karo.</div>';return}
+  gr.innerHTML=gOut.slice(0,20).map(function(o,i){
+    return '<button type="button" class="gres" data-i="'+i+'"><span class="gres-ic">'+icon(data[o.k].icon)+'</span><span class="gres-tx"><b>'+escapeHtml(o.it.title)+'</b><small>'+escapeHtml(data[o.k].short||data[o.k].title)+(o.it.meta?' · '+escapeHtml(o.it.meta):'')+'</small></span></button>';
+  }).join('');
+}
+gi.addEventListener('input',runGlobalSearch);
+gr.addEventListener('click',function(e){
+  var b=e.target.closest('.gres');if(!b)return;
+  var o=gOut[+b.dataset.i];if(!o)return;
+  if(o.it.target){pushRecent(o.k,o.it.title,o.it.target);window.open(o.it.target,'_blank','noopener')}
+  else openKey(o.k);
+});
+
+/* Bottom nav + Android back button */
+function setNav(k){document.querySelectorAll('#bnav button').forEach(function(b){b.classList.toggle('on',b.dataset.nav===k)})}
+var _os=window.openScreen,_oh=window.openHelp;
+function pushS(k){try{if(history.state&&history.state.s)history.replaceState({s:k},'');else history.pushState({s:k},'')}catch(e){}}
+window.openScreen=function(k){_os(k);pushS(k);setNav(k)};
+window.openHelp=function(){_oh();pushS('help');setNav('help')};
+function goHome(){material.classList.remove('active');home.classList.remove('hidden');setNav('home');window.scrollTo({top:0})}
+window.addEventListener('popstate',function(e){
+  if(e.state&&e.state.s){e.state.s==='help'?_oh():_os(e.state.s);setNav(e.state.s)}else goHome();
+});
+Q('#backBtn').onclick=function(){if(history.state&&history.state.s)history.back();else goHome()};
+Q('#bnav').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-nav]');if(!b)return;var k=b.dataset.nav;
+  if(k==='home'){
+    if(material.classList.contains('active')){if(history.state&&history.state.s)history.back();else goHome()}
+    else window.scrollTo({top:0,behavior:'smooth'});
+  }else openKey(k);
+});
+try{if(history.state&&history.state.s)history.replaceState(null,'')}catch(e){}
+
+/* Haptic tap feel (jahan phone support kare) */
+document.addEventListener('click',function(e){
+  if(navigator.vibrate&&e.target.closest('.service,#bnav button,.gres,.rc,.back,.install-btn,.register-btn')){try{navigator.vibrate(8)}catch(_){}}
+},true);
+
+/* Student card change hone par home refresh */
+var _rs=window.renderStudent;
+function refreshHome(){renderGreet();renderBadges();renderRecent()}
+window.renderStudent=function(){_rs();refreshHome()};
+
+var n=updateStreak();Q('#streakN').textContent=n;Q('#streak').hidden=false;
+refreshHome();renderTip();
+})();
 </script>
 
 <div class="install-help" id="installHelp" aria-hidden="true">

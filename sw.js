@@ -1,4 +1,4 @@
-const CACHE = 'shah-academic-v2';
+const CACHE = 'shah-academic-v5';
 const SHELL = ['./', './index.html', './data.js', './manifest.webmanifest',
   './icon-192.png', './icon-512.png', './maskable-512.png'];
 
