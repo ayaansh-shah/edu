@@ -11,7 +11,7 @@ const data={
  ]},
  notes:{title:"Notes",short:"NOTES",desc:"Chapter-wise notes that you can upload directly to GitHub.",icon:"notes",items:[
   {title:"Class 10 Science — Biology",desc:"jaiv prakram.",meta:"Class 10",subject:"Science",classes:["10th"],target:"material/notes/class-10-science-biology.pdf"},
-  {title:"Class 10 Mathematics",desc:"Chapter-wise mathematics notes demo entry.",meta:"Class 10",subject:"Mathematics",classes:["10th"],target:"material/notes/class-10-mathematics.pdf"},
+  {title:"Class 10 SST-Economics",desc:"Chapter-wise complete notes.",meta:"Class 10",tags:["Economics","All Chapter"],subject:"SST",classes:["10th"],target:"material/notes/Bihar_Board_Class10_Economics_.pdf"},
   {title:"Class 12 Physics",desc:"Subject notes demo entry for your future upload.",meta:"Class 12",stream:"Science",subject:"Physics",classes:["12th"],target:"material/notes/class-12-physics.pdf"}
  ]},
  pyq:{title:"PYQ",short:"PYQ",desc:"Previous-year question papers organized for exam practice.",icon:"pyq",items:[
