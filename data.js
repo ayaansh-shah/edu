@@ -10,7 +10,7 @@ const data={
   {title:"Exam Preparation PDF",desc:"Demo resource — replace with your real PDF.",meta:"PDF",tags:["Exam","Preparation","Practice","Important"],classes:["10th","12th"],target:"material/pdfs/exam-preparation.pdf"}
  ]},
  notes:{title:"Notes",short:"NOTES",desc:"Chapter-wise notes that you can upload directly to GitHub.",icon:"notes",items:[
-  {title:"Class 10 Science — Biology",desc:"Chapter notes demo entry. Put the actual file in your repository.",meta:"Class 10",subject:"Science",classes:["10th"],target:"material/notes/class-10-science-biology.pdf"},
+  {title:"Class 10 Science — Biology",desc:"jaiv prakram.",meta:"Class 10",subject:"Science",tags:["chapter 1"]classes:["10th"],target:"material/class-10-science-biology.pdf"},
   {title:"Class 10 Mathematics",desc:"Chapter-wise mathematics notes demo entry.",meta:"Class 10",subject:"Mathematics",classes:["10th"],target:"material/notes/class-10-mathematics.pdf"},
   {title:"Class 12 Physics",desc:"Subject notes demo entry for your future upload.",meta:"Class 12",stream:"Science",subject:"Physics",classes:["12th"],target:"material/notes/class-12-physics.pdf"}
  ]},
